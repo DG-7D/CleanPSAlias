@@ -3,4 +3,4 @@ if (!(Test-Path -Path $PROFILE)) {
 }
 
 $fullPath = (Get-Item -Path "CleanPSAlias.ps1").FullName
-Add-Content -Path $PROFILE -Value "Invoke-Expression `"$fullPath`""
+Add-Content -Path $PROFILE -Value ". `"$fullPath`""

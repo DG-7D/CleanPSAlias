@@ -6,8 +6,12 @@
 
 ## 使い方
 
-1. `Test.bat`を実行
-1. 実行ポリシーを「RemoteSigned」に設定するか否か答える。設定しなくても続行できるが、プロファイル機能を使うには設定する必要がある
+1.
+    - Windows PowerShellの場合
+        1. `Test.bat`を実行
+        1. 実行ポリシーを「RemoteSigned」に設定するか否か答える。設定しなくても続行できるが、プロファイル機能を使うには設定する必要がある
+    - PowerShellの場合
+        1. `CleanPSAlias.ps1 -Verbose`を実行
 1. 削除されるエイリアスが表示される
 1. 削除された状態のPowerShellが起動する。効果はこのセッション内のみ
 1. 良さそうなら`.\AddToProfile.ps1`を実行すると、プロファイルに追加され、PowerShell起動時に自動で削除されるようになる
@@ -18,8 +22,8 @@
 
 | エイリアス | 標準定義 | 備考 |
 | ---------- | -------- | ---- |
-| `curl` | `Invoke-WebRequest` | 本物の`curl.exe`がある |
+| `curl` | `Invoke-WebRequest` | 本物の`curl.exe`がある。Windows PowerShellのみ |
 | `fc` | `Format-Custom` | 用途の異なる`fc.exe`(ファイル比較)がある |
-| `sc` | `Set-Content` | 用途の異なる`sc.exe`(サービス管理)がある |
+| `sc` | `Set-Content` | 用途の異なる`sc.exe`(サービス管理)がある。Windows PowerShellのみ |
 | `sort` | `Sort-Object` | 用途の微妙に異なる`sort.exe`がある |
 | `where` | `Where-Object` | 用途の異なる`where.exe`がある |

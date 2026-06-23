@@ -1,8 +1,10 @@
 # CleanPSAlias
 
-実行時に設定されているエイリアスについて、同名のコマンドがPowerShell外に存在する場合、そのエイリアスを削除します。`curl.exe`を使う場合や、[coreutils](https://github.com/microsoft/coreutils)を導入した場合などに便利です。
+実行時に設定されているエイリアスと関数について、同名のコマンドがPowerShell外に存在する場合、そのエイリアスを削除します。`curl.exe`を使う場合や、[coreutils](https://github.com/microsoft/coreutils)を導入した場合などに便利です。
 
 エイリアスは[スクリプトでは使用しないよう求められている](https://learn.microsoft.com/powershell/scripting/learn/shell/using-aliases#dont-use-aliases-in-scripts)ため、まともなスクリプトであればこれにより壊れることはありません。
+
+関数はもしかしたら何か壊すかも……?
 
 ## 使い方
 
@@ -18,12 +20,16 @@
 
 `. "path\to\AddToProfile.ps1"`の形で登録されるので、`AddToProfile.ps1`を移動したり削除したりすると機能しなくなります。
 
-## 標準で削除されるエイリアス
+## 標準で削除されるもの
 
-| エイリアス | 標準定義 | 備考 |
+| 名前 | 標準定義 | 備考 |
 | ---------- | -------- | ---- |
 | `curl` | `Invoke-WebRequest` | 本物の`curl.exe`がある。Windows PowerShellのみ |
 | `fc` | `Format-Custom` | 用途の異なる`fc.exe`(ファイル比較)がある |
 | `sc` | `Set-Content` | 用途の異なる`sc.exe`(サービス管理)がある。Windows PowerShellのみ |
 | `sort` | `Sort-Object` | 用途の微妙に異なる`sort.exe`がある |
 | `where` | `Where-Object` | 用途の異なる`where.exe`がある |
+| `help` | (関数、`Get-Help`と変わらないように見える) | 用途の異なる`help.exe`がある |
+| `more` | (関数) | 内部で呼ばれる`more.com`がある |
+
+標準で被る関数はほとんどありませんが、`coreutils`を導入した場合に`mkdir`が被るため一応実装しています。

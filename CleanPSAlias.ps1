@@ -1,8 +1,8 @@
 param( [switch]$Verbose )
 
-$names = Get-Alias | Select-Object -ExpandProperty Name
+$blacklis = @("?")
+$names = Get-Command -CommandType Alias,Function -All | Where-Object {$_.Source -eq "" -and $blacklis -notcontains $_.Name} | Select-Object -ExpandProperty Name
 foreach ($name in $names) {
-    if ($name -eq "?") { continue }
     $commands = Get-Command $name -All
     if ($commands.Count -eq 1) { continue }
     $before = $null
@@ -14,10 +14,21 @@ foreach ($name in $names) {
             $before = $command
         }
     }
-    if ($Verbose) {
-        Write-Host ("$name : " + $before.Definition + " -> " + $after.Definition)
+    switch ($before.CommandType) {
+        "Alias" {
+            Remove-Item "Alias:$name" -Force
+            if ($Verbose) {
+                Write-Host "Alias $name :" $before.Definition "->" $after.Definition
+            }
+        }
+        "Function" {
+            Remove-Item "Function:$name" -Force
+            if ($Verbose) {
+                Write-Host "Function $name ->" $after.Definition
+            }
+        }
     }
-    Remove-Item "Alias:$name" -Force
+    
 }
 
 if ($Verbose) {

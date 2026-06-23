@@ -1,23 +1,23 @@
 param( [switch]$Verbose )
 
-$aliases = Get-Alias
-foreach ($alias in $aliases) {
-    $commands = Get-Command $alias.Name -All
+$names = Get-Alias | Select-Object -ExpandProperty Name
+foreach ($name in $names) {
+    if ($name -eq "?") { continue }
+    $commands = Get-Command $name -All
+    if ($commands.Count -eq 1) { continue }
     $before = $null
     $after = $null
     foreach ($command in $commands) {
         if ($null -eq $after -and $command.CommandType -eq "Application") {
-            $after = $command.Definition
+            $after = $command
         } elseif ($null -eq $before) {
-            $before = $command.Definition
+            $before = $command
         }
     }
-    if ($null -ne $after -and $null -ne $before) {
-        if ($Verbose) {
-            Write-Host ($alias.Name + " : " + $before + " -> " + $after)
-        }
-        Remove-Item "Alias:$($alias.Name)" -Force
+    if ($Verbose) {
+        Write-Host ("$name : " + $before.Definition + " -> " + $after.Definition)
     }
+    Remove-Item "Alias:$name" -Force
 }
 
 if ($Verbose) {

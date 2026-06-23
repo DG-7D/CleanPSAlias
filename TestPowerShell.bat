@@ -1,1 +1,1 @@
-@powershell -NoLogo -NoExit -NoProfile -ExecutionPolicy RemoteSigned -File ".\CleanPSAlias.ps1" -Verbose
+@powershell -NoLogo -NoExit -NoProfile -ExecutionPolicy RemoteSigned -File ".\ScanPSAlias.ps1"

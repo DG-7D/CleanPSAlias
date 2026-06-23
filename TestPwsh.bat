@@ -1,1 +1,1 @@
-@pwsh -NoLogo -NoExit -NoProfile -File ".\CleanPSAlias.ps1" -Verbose
+@pwsh -NoLogo -NoExit -NoProfile -File ".\ScanPSAlias.ps1"

@@ -1,7 +1,14 @@
 param( [switch]$Verbose )
 
-$blacklis = @("?")
-$names = Get-Command -CommandType Alias,Function -All | Where-Object {$_.Source -eq "" -and $blacklis -notcontains $_.Name} | Select-Object -ExpandProperty Name
+if ($Verbose -and (Get-Process -Id $PID).ProcessName -eq "powershell") {
+    $answer = Read-Host "Set the execution policy to RemoteSigned? (y/n)"
+    if ($answer.ToLower() -eq "y") {
+        Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+    }
+}
+
+$blacklist = @("?")
+$names = Get-Command -CommandType Alias,Function -All | Where-Object {$_.Source -eq "" -and $blacklist -notcontains $_.Name} | Select-Object -ExpandProperty Name
 foreach ($name in $names) {
     $commands = Get-Command $name -All
     if ($commands.Count -eq 1) { continue }

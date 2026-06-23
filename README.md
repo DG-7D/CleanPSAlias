@@ -8,12 +8,8 @@
 
 ## 使い方
 
-1.
-    - Windows PowerShellの場合
-        1. `Test.bat`を実行
-        1. 実行ポリシーを「RemoteSigned」に設定するか否か答える。設定しなくても続行できるが、プロファイル機能を使うには設定する必要がある
-    - PowerShellの場合
-        1. `CleanPSAlias.ps1 -Verbose`を実行
+1. `TestPowerShell.bat`または`TestPwsh.bat`を実行
+1. Windows PowerShellの場合、実行ポリシーを「RemoteSigned」に設定するか否か答える。設定しなくても続行できるが、プロファイル機能を使うには設定する必要がある
 1. 削除されるエイリアスが表示される
 1. 削除された状態のPowerShellが起動する。効果はこのセッション内のみ
 1. 良さそうなら`.\AddToProfile.ps1`を実行すると、プロファイルに追加され、PowerShell起動時に自動で削除されるようになる

@@ -18,7 +18,7 @@
 1. 削除された状態のPowerShellが起動する。効果はこのセッション内のみ
 1. 良さそうなら`.\AddToProfile.ps1`を実行すると、プロファイルに追加され、PowerShell起動時に自動で削除されるようになる
 
-`. "path\to\AddToProfile.ps1"`の形で登録されるので、`AddToProfile.ps1`を移動したり削除したりすると機能しなくなります。
+`. "path\to\CleanPSAlias.ps1"`の形で登録されるので、`CleanPSAlias.ps1`を移動したり削除したりすると機能しなくなります。
 
 ## 標準で削除されるもの
 
